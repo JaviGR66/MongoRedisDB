@@ -1,0 +1,2 @@
+nombre proveedor precio_sin_iva descuento_por_rango_de_fechas dimensiones peso
+precio_con_iva coste_de_envio proveedores_almacen

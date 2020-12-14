@@ -1,0 +1,817 @@
+{
+    "clientes":[
+        {
+        "nombre": "Javier",
+        "direcciones_de_facturacion": [
+            {
+                "direccion": {
+                    "nombre": "calle del Buen Suceso 25,Madrid",
+                    "coordinates": [
+                        -3.698444366455078,
+                        40.412842544007816
+                    ]
+                }
+            }
+        ],
+        "direcciones_de_envio": [
+            {
+                "direccion": {
+                    "nombre": "calle del Buen Suceso 25,Madrid",
+                    "coordinates": [
+                        -3.6971864104270935,
+                        40.425976790167056
+                    ]
+                }
+            }
+        ],
+        "tarjetas_de_pago": [7234123456787991],
+        "fecha_de_alta": "2015-07-07T00:00:00.000Z",
+        "fecha_de_ultimo_acceso":"2019-02-02T00:00:00.000Z"
+    },
+    {
+        "nombre": "Sergio",
+        "direcciones_de_facturacion": [
+            {
+                "direccion": {
+                    "nombre": "calle de Bravo Murillo 129,Madrid",
+                    "coordinates": [
+                        -3.698444366455078,
+                        40.412842544007816
+                    ]
+                }
+            }
+        ],
+        "direcciones_de_envio": [
+            {
+                "direccion": {
+                    "nombre": "calle de Bravo Murillo 129,Madrid",
+                    "coordinates": [
+                        -3.6971864104270935,
+                        40.425976790167056
+                    ]
+                }
+            }
+        ],
+        "tarjetas_de_pago": [9234123436787993],
+        "fecha_de_alta": "2016-03-05T00:00:00.000Z",
+        "fecha_de_ultimo_acceso": "2019-01-01T00:00:00.000Z"
+
+    },
+    {
+        "nombre": "Pablo",
+        "direcciones_de_facturacion": [
+            {
+                "direccion": {
+                    "nombre": "calle de Torquemada 14,Madrid",
+                    "coordinates": [
+                        -3.7127780914306645,
+                        40.42235042622174
+                    ]
+                }
+            }
+        ],
+        "direcciones_de_envio": [
+            {
+                "direccion": {
+                    "nombre": "calle de Torquemada 14,Madrid",
+                    "coordinates": [
+                        -3.713808059692383,
+                        40.42774089653129
+                    ]
+                }
+            }
+        ],
+        "tarjetas_de_pago": [1234123436727977],
+        "fecha_de_alta": "2018-03-10T00:00:00.000Z",
+        "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+    },
+    {
+        "nombre": "Lucia",
+        "direcciones_de_facturacion": [
+            {
+                "direccion": {
+                    "nombre": "calle Juan de la Cueva 5,Madrid",
+                    "coordinates": [
+                        -3.6914813518524165,
+                        40.41388815007207
+                    ]
+                }
+            }
+        ],
+        "direcciones_de_envio": [
+            {
+                "direccion": {
+                    "nombre": "calle Juan de la Cueva 5,Madrid",
+                    "coordinates": [
+                        -3.6954402923583984,
+                        40.42035747630869
+                    ]
+                }
+            }
+        ],
+        "tarjetas_de_pago": [4534123436453212],
+        "fecha_de_alta": "2013-09-09T00:00:00.000Z",
+        "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+    }
+],
+
+
+
+
+    "productos": [
+    {
+        "nombre": "iphone 8",
+        "proveedor":[
+            {
+                "nombre": "Apple Inc.",
+                "codigo": "4pp13"
+            },
+            {
+                "nombre": "Pccomponentes",
+                "codigo": "z666"
+            },
+            {
+                "nombre": "Tienda cutre",
+                "codigo": "f4k3"
+            }
+        ],
+        "precio_sin_iva": 720,
+        "precio_con_iva": 800,
+        "coste_de_envio": 50,
+        "descuento_por_rango_de_fechas": {
+            "from": "2019-01-05T00:00:00.000Z",
+            "to":   "2019-01-25T00:00:00.000Z"
+        },
+        "dimensiones": {
+            "Altura" : 160,
+            "Anchura": 60,
+            "Profundidad": 10
+        },
+        "peso": 100,
+        "proveedores_almacen": {
+            "nombre":"calle de Ferraz 31,Madrid",
+            "coordinates" : [23,12]
+         }
+    },
+    {
+        "nombre": "iphone 8 plus",
+        "proveedor":[
+            {
+                "nombre": "Apple Inc.",
+                "codigo": "4pp13"
+            },
+            {
+                "nombre": "Almacenes Chinos",
+                "codigo": "ch1n3"
+            },
+            {
+                "nombre": "Pccomponentes",
+                "codigo": "z666"
+            }
+        ],
+        "precio_sin_iva": 800,
+        "precio_con_iva": 1000,
+        "coste_de_envio": 50,
+        "descuento_por_rango_de_fechas": {
+            "from": "2019-01-26T00:00:00.000Z",
+            "to":   "2019-02-16T00:00:00.000Z"
+        },
+        "dimensiones": {
+            "Altura" : 160,
+            "Anchura": 60,
+            "Profundidad": 10
+        },
+        "peso": 100,
+        "proveedores_almacen":
+        {
+           "nombre":"calle de Ferraz 31,Madrid",
+           "coordinates" : [23,12]
+        }
+    },
+    {
+        "nombre": "macbook pro",
+        "proveedor":[
+            {
+                "nombre": "Apple Inc.",
+                "codigo": "4pp13"
+            },
+            {
+                "nombre": "Almacenes Chinos",
+                "codigo": "ch1n3"
+            },
+            {
+                "nombre": "Pccomponentes",
+                "codigo": "z666"
+            },
+            {
+                "nombre": "Tienda cutre",
+                "codigo": "f4k3"
+            }
+        ],
+        "precio_sin_iva": 630,
+        "precio_con_iva": 700,
+        "coste_de_envio": 50,
+        "descuento_por_rango_de_fechas": {
+            "from": "2019-02-17T00:00:00.000Z",
+            "to":   "2019-03-08T00:00:00.000Z"
+        },
+        "dimensiones": {
+            "Altura" : 160,
+            "Anchura": 60,
+            "Profundidad": 10
+        },
+        "peso": 100,
+        "proveedores_almacen":
+        {
+           "nombre":"calle de Samaria 8",
+           "coordinates" : [23,12]
+        }
+    },
+    {
+        "nombre": "macbook air",
+        "proveedor":[
+            {
+                "nombre": "Apple Inc.",
+                "codigo": "4pp13"
+            },
+            {
+                "nombre": "Almacenes Chinos",
+                "codigo": "ch1n3"
+            },
+            {
+                "nombre": "Pccomponentes",
+                "codigo": "z666"
+            },
+            {
+                "nombre": "Tienda cutre",
+                "codigo": "f4k3"
+            }
+        ],
+        "precio_sin_iva": 780,
+        "precio_con_iva": 900,
+        "coste_de_envio": 50,
+        "descuento_por_rango_de_fechas": {
+            "from": "2019-03-09T00:00:00.000Z",
+            "to":   "2019-03-29T00:00:00.000Z"
+        },
+        "dimensiones": {
+            "Altura" : 160,
+            "Anchura": 60,
+            "Profundidad": 10
+        },
+        "peso": 100,
+        "proveedores_almacen":
+        {
+           "nombre":"calle de Tribaldos 38,Madrid",
+           "coordinates" : [23,12]
+        }
+    }
+],
+
+
+
+    "compras": [
+    {
+        "producto": {
+            "nombre": "iphone 8",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 800,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-01-05T00:00:00.000Z",
+                "to":   "2019-01-25T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":
+                     {
+                        "nombre":"calle de Abel 20,Madrid",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Javier",
+            "tarjetas_de_pago": [7234123456787991],
+            "fecha_de_ultimo_acceso": "2019-02-02T00:00:00.000Z"
+        },
+        "precio_de_compra": 800,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {
+				"nombre": "calle del Buen Suceso 25,Madrid",
+                        	"coordinates": [-3.6971864104270935,40.425976790167056]
+			      }
+    },
+    {
+        "producto": {
+            "nombre": "iphone 8 plus",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                }
+            ],
+            "precio_con_iva": 1000,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-01-26T00:00:00.000Z",
+                "to":   "2019-02-16T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":
+            {
+               "nombre":"calle de Ferraz 31,Madrid",
+               "coordinates" : [23,12]
+            }
+        },
+        "cliente": {
+            "nombre": "Sergio",
+            "tarjetas_de_pago": [9234123436787993],
+            "fecha_de_ultimo_acceso": "2019-01-01T00:00:00.000Z"
+        },
+        "precio_de_compra": 1000,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle de Bravo Murillo 129,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "macbook pro",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 700,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-02-17T00:00:00.000Z",
+                "to":   "2019-03-08T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen": {
+                        "nombre":"calle de Samaria 8",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Pablo",
+            "tarjetas_de_pago": [1234123436727977],
+            "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+        },
+        "precio_de_compra": 700,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle de Torquemada 14,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "macbook air",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 900,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-03-09T00:00:00.000Z",
+                "to":   "2019-03-29T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen": {
+                        "nombre":"calle de Abel 20,Madrid",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Lucia",
+            "tarjetas_de_pago": [4534123436453212],
+            "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+        },
+        "precio_de_compra": 900,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle Juan de la Cueva 5,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "macbook pro",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 700,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-02-17T00:00:00.000Z",
+                "to":   "2019-03-08T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen": {
+                        "nombre":"calle de Samaria 8",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Javier",
+            "tarjetas_de_pago": [7234123456787991],
+            "fecha_de_ultimo_acceso": "2019-02-02T00:00:00.000Z"
+        },
+        "precio_de_compra": 700,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle del Buen Suceso 25,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "macbook air",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 900,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-03-09T00:00:00.000Z",
+                "to":   "2019-03-29T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen": {
+                        "nombre":"calle de Tribaldos 38,Madrid",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Sergio",
+            "tarjetas_de_pago": [9234123436787993],
+            "fecha_de_ultimo_acceso": "2019-01-01T00:00:00.000Z"
+
+        },
+        "precio_de_compra": 900,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle de Bravo Murillo 129,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "iphone 8",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 800,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-01-05T00:00:00.000Z",
+                "to":   "2019-01-25T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":
+                     {
+                        "nombre":"calle de Abel 20,Madrid",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Pablo",
+            "tarjetas_de_pago": [1234123436727977],
+            "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+        },
+        "precio_de_compra": 800,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle de Torquemada 14,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "iphone 8",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 800,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-01-05T00:00:00.000Z",
+                "to":   "2019-01-25T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":
+                     {
+                        "nombre":"calle de Tribaldos 38,Madrid",
+                        "coordinates" : [23,12]
+                     }
+        },
+        "cliente": {
+            "nombre": "Lucia",
+            "tarjetas_de_pago": [4534123436453212],
+            "fecha_de_ultimo_acceso": "2019-02-03T00:00:00.000Z"
+        },
+        "precio_de_compra": 800,
+        "fecha_de_compra": "2018-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle Juan de la Cueva 5,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "iphone 8 plus",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                }
+            ],
+            "precio_con_iva": 1000,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-01-26T00:00:00.000Z",
+                "to":   "2019-02-16T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":
+            {
+               "nombre":"calle de Samaria 8",
+               "coordinates" : [23,12]
+            }
+        },
+        "cliente": {
+            "nombre": "Javier",
+            "tarjetas_de_pago": [7234123456787991],
+            "fecha_de_ultimo_acceso": "2019-02-02T00:00:00.000Z"
+        },
+        "precio_de_compra": 1000,
+        "fecha_de_compra": "2018-08-08T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle del Buen Suceso 25,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    },
+    {
+        "producto": {
+            "nombre": "macbook pro",
+            "proveedor":[
+                {
+                    "nombre": "Apple Inc.",
+                    "codigo": "4pp13"
+                },
+                {
+                    "nombre": "Almacenes Chinos",
+                    "codigo": "ch1n3"
+                },
+                {
+                    "nombre": "Pccomponentes",
+                    "codigo": "z666"
+                },
+                {
+                    "nombre": "Tienda cutre",
+                    "codigo": "f4k3"
+                }
+            ],
+            "precio_con_iva": 700,
+            "coste_de_envio": 50,
+            "descuento_por_rango_de_fechas": {
+                "from": "2019-02-17T00:00:00.000Z",
+                "to":   "2019-03-08T00:00:00.000Z"
+            },
+            "dimensiones": {
+                "Altura" : 160,
+                "Anchura": 60,
+                "Profundidad": 10
+            },
+            "peso": 100,
+            "proveedores_almacen":{
+					"nombre":"calle de Tribaldos 38,Madrid",
+					"coordinates" : [23,12]
+				  }
+        },
+        "cliente": {
+            "nombre": "Javier",
+            "tarjetas_de_pago": [9234123436787993],
+            "fecha_de_ultimo_acceso": "2019-02-02T00:00:00.000Z"
+
+        },
+        "precio_de_compra": 700,
+        "fecha_de_compra": "2012-02-02T00:00:00.000Z",
+        "direccion_de_envio": {"nombre": "calle del Buen Suceso 25,Madrid",
+                        	"coordinates": [
+                            	-3.6971864104270935,
+                            	40.425976790167056]
+		}
+    }
+],
+
+
+
+
+"proveedores":[
+    {
+        "nombre": "Apple Inc.",
+        "direcciones_almacenes":[{"direccion":
+				 {
+					"nombre":"calle de Ferraz 31,Madrid",
+					"coordinates" : [23,12]
+				 }
+				}],
+        "codigo": "4pp13"
+    },
+    {
+        "nombre": "Almacenes Chinos",
+        "direcciones_almacenes":[{"direccion":
+				 {
+					"nombre":"calle de Abel 20,Madrid",
+					"coordinates" : [23,12]
+				 }
+				 }],
+        "codigo": "ch1n3"
+    },
+    {
+        "nombre": "Pccomponentes",
+        "direcciones_almacenes":[{"direccion":
+				 {
+					"nombre":"calle de Tribaldos 38,Madrid",
+					"coordinates" : [23,12]
+				 }
+				 }],
+        "codigo": "z666"
+    },
+    {
+        "nombre": "Tienda cutre",
+        "direcciones_almacenes":[{"direccion":
+				 {
+					"nombre":"calle de Samaria 8",
+					"coordinates" : [23,12]
+				 }
+				 }],
+        "codigo": "f4k3"
+    }
+]
+}

@@ -1,0 +1,2 @@
+nombre direcciones_de_facturacion direcciones_de_envio tarjetas_de_pago fecha_de_ultimo_acceso
+fecha_de_alta
