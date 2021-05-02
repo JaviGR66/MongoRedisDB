@@ -3,6 +3,7 @@ __author__ = 'Javier Garcia Rubio'
 import _thread
 import threading
 import time
+import asyncio
 
 import redis as redis
 from bson import ObjectId
@@ -12,6 +13,8 @@ from geopy.geocoders import Nominatim
 from geojson import Point
 from math import sin, cos, sqrt, atan2, radians
 import json
+import aioredis
+import random
 
 
 def getCityGeoJSON(adress):
@@ -22,7 +25,7 @@ def getCityGeoJSON(adress):
         (str) -- GeoJSON
     """
 
-    geolocator = Nominatim(user_agent="P2_G6_Javier_Garcia.py")
+    geolocator = Nominatim(user_agent="P2_G6_Javier_Garcia_Sergio_Esteban.py")
     location = geolocator.geocode(adress, timeout=20)
     # TODO
     # Devolver GeoJSON de tipo punto con la latitud y longitud almacenadas
@@ -50,6 +53,7 @@ class Model(object):
     admissible_vars = []
     db = None
     redis_db = None
+    query_update = None
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
@@ -65,12 +69,17 @@ class Model(object):
             string += (key + ": " + str(value) + "\n")
         return string
 
+    # IMPLEMENTAR EK GET BYID
+
     def save(self):
         # TODO
         if hasattr(self, '_id'):
             for key in vars(self):
                 if key in self.modified_atributes:
                     self.db.update_one({'_id': self._id}, {'$set': {key: getattr(self, key)}})
+                    # self.redis_db.set(str(self._id), json_data)
+                    # self.redis_db.expire(str(self._id), 86400)
+
         else:
             new_tuple = {}
             for key in vars(self):
@@ -78,13 +87,21 @@ class Model(object):
                     new_tuple.update({key: getattr(self, key)})
 
             self.db.insert_one(new_tuple)
-
+        name_for_match = self.query_update.get("nombre")
+        # AÑADIDO PARA EL ERROR 1
+        if name_for_match == None:
+            name_for_match = self.query_update.get("producto")
+            query = [{'$match': {'producto': name_for_match}}]
+        else:
+            query = [{'$match': {'nombre': name_for_match}}]
+        self.getById(query)
         self.modified_atributes.clear
 
     def update(self, **kwargs):
         # TODO
         self.modified_atributes = []
-        print(kwargs)
+        # print(kwargs)
+        self.query_update = kwargs
         for key, value in kwargs.items():
             if key is 'direcciones_de_facturacion':
                 for item in value:
@@ -115,7 +132,7 @@ class Model(object):
         cls.redis_db.config_set('maxmemory-policy', 'volatile-ttl')
         cls.redis_db.config_set('maxmemory', '150mb')
 
-        #ADM, REQ VAR
+        # ADM, REQ VAR
         with open(vars_path) as file:
             cls.required_vars = file.readline().split()
             cls.admissible_vars = file.readline().split()
@@ -123,7 +140,7 @@ class Model(object):
     @classmethod
     def getById(cls, id):
         # REDIS
-        #id es la query
+        # id es la query
         print("ID: ", id)
         print("From redis")
         data = cls.redis_db.get(str(id))
@@ -145,9 +162,10 @@ class Model(object):
                 # print(json_data)
                 # json_data = dumps(list(data.next()), indent=2)
                 cls.redis_db.set(str(id), json_data)
-                cls.redis_db.expire(str(id), 86400)
-
+        # AÑADIDO PARA SOLUCIONAR EL ERROR 2
+        cls.redis_db.expire(str(id), 86400)
         return data
+
 
 class Cliente(Model):
     @classmethod
@@ -156,6 +174,7 @@ class Cliente(Model):
         """
         model_cursor = ModelCursor(cls, cls.db.aggregate(query))
         return model_cursor
+
 
 class Compra(Model):
     @classmethod
@@ -183,45 +202,6 @@ class Proveedor(Model):
         cursor = cls.db.aggregate(query)
         cursor_custom = ModelCursor(Proveedor, cursor)
         return cursor_custom
-
-
-class Pack(object):
-    def __init__(self, **kwargs):
-        pass
-
-    @classmethod
-    def init_class(cls, redis_db):
-        # Conexion con bases de datos
-        cls.redis_db = redis_db
-
-    @classmethod
-    def postPack(cls, service, userid, cont):
-        if service != 1:
-            userid = userid + str(cont)
-            pipeline.set("compra", userid)
-            pipeline.expire("compra", 60)
-        else:
-            pipeline.set("compra", userid)
-
-
-    @classmethod
-    def execPack(cls):
-        return pipeline.execute()
-
-
-# Define a function for the thread
-def print_thread(threadName, delay, service, id):
-    count = 0
-    while count < 5:
-        time.sleep(delay)
-        count += 1
-        print(threadName +"\nNumero: " + str(count) + "\nSercicio " + ("Principal\n" if service == 1 else "No Principal\n"))
-        # TEST EMPAQUETADO
-        Pack.postPack(2, id, count)
-    print(Pack.execPack())
-
-
-
 
 # Compras
 # Q1: Listado de todas las compras de un cliente
@@ -278,7 +258,7 @@ Q4 = [{'$match':
             'cliente.nombre': 1,
             'peso_total': {'$sum': '$producto.peso'}
                , 'volumen_total': {'$sum': {'$multiply': ['$producto.dimensiones.Altura'
-                                                            , '$producto.dimensiones.Anchura',
+               , '$producto.dimensiones.Anchura',
                                                           '$producto.dimensiones.Profundidad']}}}},
       {'$group':
            {'_id': "$_id",
@@ -291,7 +271,7 @@ Q4 = [{'$match':
             'volumen_total': {'$sum': '$volumen_total'},
             'numero_compras': {'$sum': 1}}}]
 
-# NO SE
+
 Q5 = []
 
 # Compras
@@ -351,6 +331,58 @@ Q8 = [{'$match': {'direccion_de_envio.coordinates': {'$geoWithin': {'$geometry'
                                                                                         [-3.67202335,
                                                                                          40.4097376]]]}}}}}]
 
+
+
+def main_thread(redis_db, ids, prio):
+    while True:
+        print("main")
+        # threading.Thread(target=empaquetar(redis_db, ids, prio)).start()
+        pack = redis_db.blpop(keys=["Compra"], timeout=0)
+        id = pack[1].split("|")[0]
+        prio = pack[1].split("|")[1]
+        print(id)
+        print(prio)
+        # threading.Thread(target=empaquetar(redis_db, ids, prio)).start()
+        if pack is not None:
+            threading.Thread(target=worker(redis_db), name=id+1).start()
+
+
+# def empaquetar(redis_db, pack):
+#     redis_db.rpush(pack[0], pack[1])
+
+def empaquetar(redis_db, id, prio):
+    print("pack")
+    push = id+"|"+str(prio)
+    redis_db.rpush("Compra", push)
+
+
+def worker(redis_db):
+    fin_pack = False
+    threads = []
+    print("worker")
+    while not fin_pack:
+        pack = redis_db.blpop(keys=["Compra"], timeout=60)
+        print(pack[0])
+        id = pack[1].split("|")[0]
+        prio = pack[1].split("|")[1]
+        print(id)
+        print(prio)
+        if pack is not None:
+            threading.Thread(target=worker(redis_db), name=id + 1).start()
+            print("Empaquetando...")
+            newThread = threading.Thread(target=crearHilo(id, prio))
+            threads.append(newThread)
+            newThread.start()
+
+            print("Empaquetado")
+        else:
+            fin_pack = True
+
+
+def crearHilo(ids, prio):
+    print("Empàquetando para usuario con id: " + str(ids) + "\n con prioridad " + str(prio))
+
+
 if __name__ == '__main__':
     # TODO
     database_json = "Database1.json"
@@ -358,7 +390,6 @@ if __name__ == '__main__':
 
     db = client.practica
     redis_db = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
-    pipeline = redis_db.pipeline()
 
     with open(database_json, 'r') as insertItems:
         model_data = json.loads(insertItems.read())
@@ -388,9 +419,7 @@ if __name__ == '__main__':
     #         value['direccion']['coordinates'] = getCityGeoJSON(value['direccion']['nombre'])
     #     db['proveedores'].insert_one(item)
 
-    # TODO: si pongo db.compras da error no se porque
-
-    Compra.init_class(db['compras'],redis_db, "CompraVariables.txt")
+    Compra.init_class(db['compras'], redis_db, "CompraVariables.txt")
     Cliente.init_class(db['clientes'], redis_db, "ClienteVariables.txt")
     Producto.init_class(db['productos'], redis_db, "ProductoVariables.txt")
     Proveedor.init_class(db['proveedores'], redis_db, "ProveedorVariables.txt")
@@ -400,54 +429,7 @@ if __name__ == '__main__':
     # print(redis_test)
     # Pack.init_class(redis_db)
 
-    # TEST EMPAQUETADO
-    query_javi_id = [{"$match":{"nombre":"Javier"}},{"$group":{"_id":"$_id"}}]
-    query_sergio_id = [{"$match":{"nombre":"Sergio"}},{"$group":{"_id":"$_id"}}]
-    query_pablo_id = [{"$match":{"nombre":"Pablo"}},{"$group":{"_id":"$_id"}}]
-
-    cursor = Cliente.query(query_javi_id)
-    javi_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
-
-    cursor = Cliente.query(query_sergio_id)
-    sergio_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
-
-    cursor = Cliente.query(query_pablo_id)
-    pablo_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
-
-
-
-    # CREAR 3 HILOS
-    t1 = threading.Thread(target=print_thread, args=("Compra Javier", 2, 1, javi_id))
-    t2 = threading.Thread(target=print_thread, args=("Compra Sergio", 4, 2, sergio_id))
-    t3 = threading.Thread(target=print_thread, args=("Compra Pablo", 4, 2, pablo_id))
-
-    t1.start()
-    t2.start()
-    t3.start()
-
-    t1.join()
-    t2.join()
-    t3.join()
-    # _thread.start_new_thread(print_thread, ("Compra Javier", 2, 1, javi_id))
-    # _thread.start_new_thread(print_thread, ("Compra Sergio", 4, 2, sergio_id))
-    # _thread.start_new_thread(print_thread, ("Compra Pablo", 4, 2, pablo_id))
-
-
-    # cursorClient = Compra.query(Q1)
-    # cursorClient = Proveedor.query(Q2)
-    # cursorClient = Producto.query(Q3)
-    # cursorClient = Compra.query([{'$limit': 10}]) # test
-    # cursorClient = Compra.query(Q4)
-    # cursorClient = Proveedor.query(Q5) # no la tengo
-    # cursorClient = Compra.query(Q6)
-    # cursorClient = Proveedor.query(Q7)
-    # cursorClient = Compra.query(Q8)
-    # print(Q1)
-    # cursorClient = Proveedor.query([{'$match':{'nombre':'Pedro'}}])
-    # print(cursorClient.next())
-
-    # TODO: Esto es para ver que el update funciona
-
+    #######################################################################
     # Proveedor.update(Proveedor, nombre='Pedro', direcciones_almacenes=[{"direccion":
     #     {
     #         "nombre": "calle de Tribaldos 40,Madrid",
@@ -455,16 +437,36 @@ if __name__ == '__main__':
     #     }
     # }], codigo='d333')
     # Proveedor.save(Proveedor)
-    # Producto.update(Producto, nombre='iphone 10', proveedor='hola', precio_sin_iva=10,
-    #                 descuento_por_rango_de_fechas='hola', dimensiones='hola', peso='hola',
-    #                 precio_con_iva=15, coste_de_envio=5, proveedores_almacen={
-    #         "nombre": "calle de Tribaldos 40,Madrid",
-    #         "coordinates": [23, 12]
-    #     })
-    # Producto.save(Producto)
+    #######################################################################
+    # TEST EMPAQUETADO
+    query_javi_id = [{"$match": {"nombre": "Javier"}}, {"$group": {"_id": "$_id"}}]
+    query_sergio_id = [{"$match": {"nombre": "Sergio"}}, {"$group": {"_id": "$_id"}}]
+    query_pablo_id = [{"$match": {"nombre": "Pablo"}}, {"$group": {"_id": "$_id"}}]
 
-    # TODO: Esto es para checkear el update
-    # cursorClient = Proveedor.query([{'$match':{'nombre':'Pedro'}}])
-    # print(cursorClient.next())
-    # while cursorClient.alive:
-    #     print(cursorClient.next())
+    cursor = Cliente.query(query_sergio_id)
+    sergio_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
+
+    cursor = Cliente.query(query_pablo_id)
+    pablo_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
+
+    cursor = Cliente.query(query_javi_id)
+    javi_id = str(cursor.next()).split("_id: ")[1].replace("\n", "")
+
+    print("hilo")
+    t = []
+    d = threading.Thread(target=main_thread, args=(redis_db, javi_id, 1))
+    # d.setDaemon(True)
+    # threading.Thread(target=empaquetar(redis_db, ids, prio)).start()
+    thread_pack = threading.Thread(target=empaquetar, args=(redis_db, javi_id, 1))
+    thread_pack_2 = threading.Thread(target=empaquetar, args=(redis_db, pablo_id, 2))
+    thread_pack_3 = threading.Thread(target=empaquetar, args=(redis_db, sergio_id, 1))
+
+    t.append(d)
+
+    t.append(thread_pack)
+    t.append(thread_pack_2)
+    t.append(thread_pack_3)
+    t[0].start()
+    t[1].start()
+    t[3].start()
+    t[2].start()
